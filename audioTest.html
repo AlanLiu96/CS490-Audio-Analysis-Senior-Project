@@ -19,11 +19,15 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/examples.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> -->
 
-    <title>Location Testing with Bone Conduction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+
+    <title>ILD Location Testing with Bone Conduction</title>
   </head>
   <body>
 
@@ -33,32 +37,18 @@
           <h1>Location Testing</h1>
           <p class="lead">
             <img src="resources/headphones.svg" class="icon-lg" alt="headphones">
-            Please put on your Bone Conduction headphones 
+            Please put on your Bone Conduction headphones. 
           </p>
           <p>
-            Choose where to place each microphone and yourself around the room. Select various options of room sizes and wall materials.
+            The audio will play from a different location in the room. Do your best to guess if it is on the left or the right. The results will be shown at the end. 
           </p>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="roomDimensionsSelect" class="col-form-label">Room Dimensions</label>
-              <select id="roomDimensionsSelect" class="form-control">
-                <option value="small" selected>Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-                <option value="huge">Huge</option>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="roomMaterialsSelect" class="col-form-label">Wall Materials</label>
-              <select id="roomMaterialsSelect" class="form-control">
-                <option value="brick" selected>Brick</option>
-                <option value="curtains">Curtains</option>
-                <option value="marble">Marble</option>
-                <option value="outside">Outdoors</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
+
+          <p> This program will show the importance of ILD in bone conduction compared to normal hearing. We will focus on higher frequency sounds for higher attenuation between both ears (Stenfelt 2013) </p> 
+
+
+          <button type="button" class="btn btn-primary" id="sourceBButton">Play</button>
+
+<!--           <div class="row">
             <div class="col-md-3 mb-2">
               <div class="input-group">
                 <span class="input-group-addon">
@@ -89,21 +79,21 @@
                 </span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
-        <div class="col-lg-5 text-center">
+<!--         <div class="col-lg-5 text-center">
           <div style="width:100%">
             <canvas id="canvas"></canvas>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/resonance-audio/build/resonance-audio.min.js"></script>
+<!--     <script src="https://cdn.jsdelivr.net/npm/resonance-audio/build/resonance-audio.min.js"></script>
     <script src="resources/js/canvas-control.js"></script>
-    <script src="resources/js/room-models.js"></script>
+    <script src="resources/js/room-models.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> -->
   </body>
 </html>
