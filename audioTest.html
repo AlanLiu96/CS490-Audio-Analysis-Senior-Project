@@ -26,72 +26,140 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 
     <title>ILD Location Testing with Bone Conduction</title>
   </head>
   <body>
-
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-5 mb-2">
+    <div class="ui segment">
           <h1>Location Testing</h1>
           <p class="lead">
-            <img src="resources/headphones.svg" class="icon-lg" alt="headphones">
             Please put on your Bone Conduction headphones. 
           </p>
           <p>
             The audio will play from a different location in the room. Do your best to guess if it is on the left or the right. The results will be shown at the end. 
           </p>
 
-          <p> This program will show the importance of ILD in bone conduction compared to normal hearing. We will focus on higher frequency sounds for higher attenuation between both ears (Stenfelt 2013) </p> 
+          <p> This program will show the importance of Interaural Level Differences in bone conduction compared to normal hearing. We will focus on an audio sample containing higher frequency sounds for higher attenuation between both ears</p> 
 
+          <center>
+          <button class="ui green button" onclick="playSound()">Play Sound</button>
+          <button class="ui button" onclick="seeResults()">See Results</button>
+          <br><br>
+          Choose where the sound is coming from:<br><br>
+          <button class="ui button" onclick="chooseLeft()">Left</button>
+          <button class="ui button" onclick="chooseRight()">Right</button> <br><br>
+          <button class="ui button" onclick="Skip()">Skip</button> 
+          <br><br>
 
-          <button type="button" class="btn btn-primary" id="sourceBButton">Play</button>
+        </center>
 
-<!--           <div class="row">
-            <div class="col-md-3 mb-2">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <img src="resources/volume-high.svg" class="icon-button">
-                </span>
-                <span class="input-group-btn">
-                  <button type="button" class="btn btn-primary" id="sourceAButton">Play</button>
-                </span>
-              </div>
-            </div>
-            <div class="col-md-3 mb-2">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <img src="resources/microphone.svg" class="icon-button">
-                </span>
-                <span class="input-group-btn">
-                  <button type="button" class="btn btn-primary" id="sourceBButton">Play</button>
-                </span>
-              </div>
-            </div>
-            <div class="col-md-3 mb-2">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <img src="resources/musical-note.svg" class="icon-button">
-                </span>
-                <span class="input-group-btn">
-                  <button type="button" class="btn btn-primary" id="sourceCButton">Play</button>
-                </span>
-              </div>
-            </div>
-          </div> -->
-        </div>
-<!--         <div class="col-lg-5 text-center">
-          <div style="width:100%">
-            <canvas id="canvas"></canvas>
-          </div>
-        </div> -->
+        <div class= "ui segment">
+        <canvas id="myChart" width="400" height="400"></canvas>
       </div>
-    </div>
+          
+          </div>
+          <!-- On load, choose random number in array -->
+<!-- On play Sound for first time, unhide the other buttons, play the aac file given -->
+<!-- On hitting left or right, check to see if it matches the audio file, if it does, mark it as right and add to a list as a tuple? Unhide see results onclick -->
+<!-- When see results clicked, programmatically generate a graph with different files and percentage correct -->
 
-<!--     <script src="https://cdn.jsdelivr.net/npm/resonance-audio/build/resonance-audio.min.js"></script>
-    <script src="resources/js/canvas-control.js"></script>
-    <script src="resources/js/room-models.js"></script> -->
+    <script type="text/javascript">
+      var numSamples = 31
+      var randomSample = Math.floor(Math.random() * numSamples);
+      var audioNum = randomSample - 15;
+      var correct = Array(numSamples).fill(0);
+      var played = Array(numSamples).fill(0);
+
+      var audio = new Audio('/AudioFiles/'  + audioNum.toString()+ '.aac');
+
+      function playSound() {
+        window.audio = new Audio('/AudioFiles/'  + audioNum.toString()+ '.aac');
+        audio.play();
+        console.log("played audio sample " + audioNum.toString())
+      }
+
+      function chooseLeft() {
+        audio.pause();
+        played[randomSample] +=1;
+
+        if (audioNum < 0){
+          correct[randomSample] +=1;
+          console.log("chose correctly")
+        } // on left
+
+        window.randomSample = Math.floor(Math.random() * numSamples);
+        window.audioNum = randomSample - 15;
+      }
+
+      function chooseRight() {
+        audio.pause();
+        played[randomSample] +=1;
+
+        if (audioNum > 0){
+          correct[randomSample] +=1;
+          console.log("chose correctly")
+        } // on right
+
+        window.randomSample = Math.floor(Math.random() * numSamples);
+        window.audioNum = randomSample - 15;
+      }
+      function Skip() {
+        audio.pause();
+        window.randomSample = Math.floor(Math.random() * numSamples);
+        window.audioNum = randomSample - 15;
+      }
+
+
+      function seeResults() {
+        console.log("correct responses")
+        console.log(correct)
+        console.log("Total responses")
+        console.log(played)
+
+        var correctRate = Array(numSamples).fill(0);
+        for (var i = 0; i < numSamples; i++) {
+          if (played[i] == 0){
+            continue;
+          }
+          correctRate[i] = correct[i]/played[i];
+        }
+        console.log(correctRate)
+
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: [0, 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96, 102, 108, 114, 120, 126, 132, 138,  144, 150, 156, 162, 168, 174, 180],
+              datasets: [{ 
+                  data: correctRate,
+                  label: "Accuracy",
+                  borderColor: "#3e95cd",
+                  fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+      }
+
+
+
+    </script>
+
+    <script>
+      
+</script>
+
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> -->

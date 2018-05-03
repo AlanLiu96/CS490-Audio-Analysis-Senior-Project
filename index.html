@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properties -->
+  <title>Alan Liu - CPSC 490 Senior Project</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+</head>
+
+
+<body>
+<div class="ui segment raised">
+<h1>Sound Enhancement and Source Localization with Bone Conduction</h1>
+<b> Presented by: Alan Liu </b><br>
+<b>Advisor: Professor Steven Zucker, Yale Computer Science Department </b><br>
+
+<h2> Abstract</h2> 
+Audio speech enhancement has been an active area of development with applications in areas including internet of things devices, hearing aids, virtual and augmented reality. Nearly every application that uses a microphone and processes speech employs some form of speech enhancement and noise filtering. <br>
+<br>
+<i>Objective</i><br>
+Improve on those speech enhancement and noise filtering capabilities in the bone conduction setting. Combine noise filtering with level differences in a bone conduction application to deliver high fidelity sound. <br>
+<br>
+<i>Method</i><br>
+Use an audio speech recognition(ASR) dataset for audio samples and a testing framework to test different speech enhancement techniques including beamforming and GMM-EM models.
+
+Create a bone conduction Arduino application that listens to input sounds and filters out noise, playing the noise filtered sound through the bone conduction transducer. 
+
+Employ a bone conduction headphone application on a high frequency audio signal with various ILDs to test various different head related transfer functions for bone conduction.
+<br><br>
+<i>Results</i><br>
+I was able to improve on the Word Error Rate (WER) on the speech recognition dataset from 18.38% to 15.13% by applying a band pass filter at frequency cutoffs of 50 and 3000 Hz testing with a gaussian mixture model and expectation maximization algorithm. 
+
+I created a web application that uses various high frequency sounds with staggered level delays to empirically test a bone conduction transfer function using commercial bone conduction headphones.
+
+The main limitation after applying some of the techniques to the Arduino application was in the speed of the digital audio processing. Without specialized hardware, it was difficult to obtain real-time results that would be necessary in many applications such as hearing aids. 
+
+This work may be useful in bone conduction applications such as Google Glass in augmented reality to realistically simulate binaural sound in virtual environments.
+
+
+<h2>Links</h2>
+Github Repository<br>
+<a href="/proposal.pdf">Project Proposal</a><br>
+<a href="/audioTest.html">Audio Interaural Level Delay Test</a> <br>
+Final Writeup<br>
+</div>
+</body>
+
+</html>
